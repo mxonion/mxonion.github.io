@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IMPORTANT SITE.</title>
+<style>
+html, body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: black;
+}
+
+#video {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+    display: none;
+    background: black;
+}
+
+#entry {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: black;
+    color: white;
+    font: bold 4rem sans-serif;
+    cursor: pointer;
+    user-select: none;
+}
+</style>
+</head>
+<body>
+
+<div id="entry">CLICK!!!!</div>
+<video id="video" src="video.mp4" playsinline></video>
+
+<script>
+const entry = document.getElementById("entry");
+const video = document.getElementById("video");
+
+entry.addEventListener("click", async () => {
+    try {
+        await video.play();
+
+        entry.style.display = "none";
+        video.style.display = "block";
+    } catch (err) {
+        console.error("Playback failed:", err);
+    }
+});
+
+video.addEventListener("pause", () => {
+    if (!video.ended) {
+        entry.style.display = "flex";
+        video.style.display = "none";
+    }
+});
+</script>
+
+</body>
+</html>
